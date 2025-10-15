@@ -4,18 +4,16 @@ COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
-
 COPY src src
 
-
+# ./gradlew 파일 권한 변경
 RUN chmod +x ./gradlew
 
+# gradle 빌드
 RUN ./gradlew bootJar
 FROM ghcr.io/graalvm/jdk-community:21
-ARG MODULE_NAME
 
-COPY --from=builder /build/libs/*.jar app.jar
+COPY --from=builder build/libs/*.jar app.jar
 
 ENTRYPOINT [ "java","-jar","/app.jar" ]
-
 VOLUME /tmp
