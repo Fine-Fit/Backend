@@ -8,7 +8,6 @@ import com.finefit.api.domain.model.type.ExerciseStyleType;
 import com.finefit.api.domain.model.type.ExerciseType;
 import com.finefit.api.domain.model.type.GenderType;
 import com.finefit.api.domain.model.type.PainAreaType;
-import com.finefit.api.domain.model.type.YesNoType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,14 @@ public class CounselDTO {
   /** 생년월일 / 나이 */
   private String birthDateOrAge;
 
-  /** 성별 */
+  /** 성별
+   *
+   *   MALE("남성")
+   *   FEMALE("여성")
+   *   OTHER("기타")
+   *
+   * 전달을 할때 대문자 형식으로
+   * */
   private GenderType gender;
 
   /** 키 / 현재 체중 */
@@ -41,7 +47,28 @@ public class CounselDTO {
 
   // ===== 1. 운동 목표 =====
 
-  /** 운동 목적 (복수 선택 가능) */
+  /** 운동 목적 (복수 선택 가능)
+   *
+   *   WEIGHT_LOSS("체중 감량 / 다이어트")
+   *   WEIGHT_GAIN("체중 증가 / 벌크업")
+   *   POSTURE_CORRECTION("체형 교정")
+   *   STRENGTH_INCREASE("근력 향상")
+   *   HEALTH_MANAGEMENT("건강 관리 / 체력 증가")
+   *   PAIN_RELIEF("통증 개선")
+   *   POSTURE_ADJUSTMENT("자세 교정")
+   *   ETC("기타")
+   *
+   *   예시)
+   *   WEIGHT_LOSS : false
+   *   WEIGHT_GAIN : true
+   *   POSTURE_CORRECTION: false
+   *   STRENGTH_INCREASE : true
+   *   HEALTH_MANAGEMENT : false
+   *   PAIN_RELIEF : false
+   *   POSTURE_ADJUSTMENT : false
+   *   ETC : false
+   *
+   * */
   private Map<ExerciseGoalType, Boolean> exerciseGoal;
 
   /** 운동 목적 - 기타 내용 */
@@ -53,18 +80,54 @@ public class CounselDTO {
   // ===== 2. 운동 경험 =====
 
   /** 이전 퍼스널 트레이닝 경험 여부 */
-  private YesNoType hasPtExperience;
+  private boolean hasPtExperience;
 
-  /** 평소 운동 빈도 */
+  /** 평소 운동 빈도
+   *
+   *   NEVER("전혀 하지 않음")
+   *   SOMETIMES("가끔 (주 1~2회)")
+   *   REGULARLY("규칙적으로 (주 3회 이상)")
+   *
+   * */
   private ExerciseFrequencyType exerciseFrequency;
 
-  /** 해본 운동 종류 (복수 선택 가능) */
+  /** 해본 운동 종류 (복수 선택 가능)
+   *
+   *   GYM("헬스장 운동")
+   *   CARDIO("유산소 운동")
+   *   HOME_TRAINING("홈트레이닝")
+   *   PILATES_YOGA("필라테스 / 요가")
+   *   MARTIAL_ARTS_CROSSFIT("격투기 / 크로스핏 등")
+   *   ETC("기타")
+   *
+   *   예시)
+   *   GYM("헬스장 운동") : true
+   *   CARDIO : true
+   *   HOME_TRAINING : false
+   *   PILATES_YOGA : false
+   *   MARTIAL_ARTS_CROSSFIT : true
+   *   ETC : false
+   * */
   private Map<ExerciseType, Boolean> exercise;
 
   /** 해본 운동 종류 - 기타 내용 */
   private String exerciseTypeEtc;
 
-  /** 운동 시 선호하는 스타일 */
+  /** 운동 시 선호하는 스타일 (복수 선택 가능)
+   *
+   *   DETAILED_POSTURE("꼼꼼한 자세 교정")
+   *   HIGH_INTENSITY("땀나는 고강도 운동")
+   *   FUN_AND_LIGHT("재밌고 가벼운 운동")
+   *   CUSTOMIZED("목적에 따라 맞춤 조절")
+   *
+   *
+   *   예시)
+   *   DETAILED_POSTURE : true
+   *   HIGH_INTENSITY : false
+   *   FUN_AND_LIGHT : false
+   *   CUSTOMIZED : true
+   *
+   * */
   private ExerciseStyleType preferredStyle;
 
   // ===== 3. 식습관 =====
@@ -89,7 +152,23 @@ public class CounselDTO {
   /** 현재 또는 과거 질환이나 통증 */
   private String medicalHistory;
 
-  /** 통증이 있는 부위 (복수 선택 가능) */
+  /** 통증이 있는 부위 (복수 선택 가능)
+   *
+   *   SHOULDER("어깨"),
+   *   KNEE("무릎"),
+   *   WAIST("허리"),
+   *   NECK("목"),
+   *   ETC("기타");
+   *
+   *
+   *   예시)
+   *   SHOULDER : true
+   *   KNEE : false
+   *   WAIST : true
+   *   NECK : true
+   *   ETC : false
+   *
+   * */
   private Map<PainAreaType, Boolean> painArea;
 
   /** 통증 부위 - 기타 내용 */
@@ -107,9 +186,15 @@ public class CounselDTO {
   private String sleepInfo;
 
   /** 흡연 여부 */
-  private YesNoType smoking;
+  private boolean smoking;
 
-  /** 음주 빈도 */
+  /** 음주 빈도
+   *
+   *   RARELY("거의 안 함")
+   *   SOMETIMES("가끔 (주 1회 이하)")
+   *   OFTEN("자주 (주 2회 이상)")
+   *
+   * */
   private DrinkingFrequencyType drinkingFrequency;
 
   /** 하루 평균 스트레스 수준 (1~5점) */
@@ -130,7 +215,7 @@ public class CounselDTO {
         .exerciseGoal(counselDTO.exerciseGoal)
         .exerciseGoalEtc(counselDTO.getExerciseGoalEtc())
         .targetPeriod(counselDTO.getTargetPeriod())
-        .hasPtExperience(counselDTO.getHasPtExperience())
+        .hasPtExperience(counselDTO.isHasPtExperience())
         .exerciseFrequency(counselDTO.getExerciseFrequency())
         .exercise(counselDTO.exercise)
         .exerciseTypeEtc(counselDTO.getExerciseTypeEtc())
@@ -146,7 +231,7 @@ public class CounselDTO {
         .medicationOrPrecautions(counselDTO.getMedicationOrPrecautions())
         .occupationAndActivity(counselDTO.occupationAndActivity)
         .sleepInfo(counselDTO.getSleepInfo())
-        .smoking(counselDTO.getSmoking())
+        .smoking(counselDTO.isSmoking())
         .drinkingFrequency(counselDTO.getDrinkingFrequency())
         .stressLevel(counselDTO.getStressLevel())
         .exerciseObstacles(counselDTO.getExerciseObstacles())
@@ -166,7 +251,7 @@ public class CounselDTO {
           .exerciseGoal(counsel.getExerciseGoal())
           .exerciseGoalEtc(counsel.getExerciseGoalEtc())
           .targetPeriod(counsel.getTargetPeriod())
-          .hasPtExperience(counsel.getHasPtExperience())
+          .hasPtExperience(counsel.isHasPtExperience())
           .exerciseFrequency(counsel.getExerciseFrequency())
           .exercise(counsel.getExercise())
           .exerciseTypeEtc(counsel.getExerciseTypeEtc())
@@ -182,7 +267,7 @@ public class CounselDTO {
           .medicationOrPrecautions(counsel.getMedicationOrPrecautions())
           .occupationAndActivity(counsel.getOccupationAndActivity())
           .sleepInfo(counsel.getSleepInfo())
-          .smoking(counsel.getSmoking())
+          .smoking(counsel.isSmoking())
           .drinkingFrequency(counsel.getDrinkingFrequency())
           .stressLevel(counsel.getStressLevel())
           .exerciseObstacles(counsel.getExerciseObstacles())

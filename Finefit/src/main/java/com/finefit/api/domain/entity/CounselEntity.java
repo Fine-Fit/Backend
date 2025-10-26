@@ -11,7 +11,6 @@ import com.finefit.api.domain.model.type.ExerciseStyleType;
 import com.finefit.api.domain.model.type.ExerciseType;
 import com.finefit.api.domain.model.type.GenderType;
 import com.finefit.api.domain.model.type.PainAreaType;
-import com.finefit.api.domain.model.type.YesNoType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -20,8 +19,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -76,8 +73,7 @@ public class CounselEntity {
   // ===== 2. 운동 경험 =====
 
   /** 이전 퍼스널 트레이닝 경험 여부 */
-  @Enumerated(EnumType.STRING)
-  private YesNoType hasPtExperience;
+  private boolean hasPtExperience;
 
   /** 평소 운동 빈도 */
   @Enumerated(EnumType.STRING)
@@ -137,8 +133,7 @@ public class CounselEntity {
   private String sleepInfo;
 
   /** 흡연 여부 */
-  @Enumerated(EnumType.STRING)
-  private YesNoType smoking;
+  private boolean smoking;
 
   /** 음주 빈도 */
   @Enumerated(EnumType.STRING)
