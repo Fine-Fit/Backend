@@ -5,6 +5,7 @@ import com.finefit.api.domain.model.dto.request.account.LoginDTO;
 import com.finefit.api.domain.model.dto.response.ResultResponse;
 import com.finefit.api.domain.model.dto.request.account.RegisterDTO;
 import com.finefit.api.service.AdminService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +48,9 @@ public class AdminController {
   }
 
   @PostMapping("/auth/login")
-  public ResponseEntity<ResultResponse> adminLogin(@RequestBody LoginDTO loginDTO) {
+  public ResponseEntity<ResultResponse> adminLogin(HttpServletResponse httpServletResponse, @RequestBody LoginDTO loginDTO) {
 
-    ResultResponse response = adminService.adminLogin(loginDTO);
+    ResultResponse response = adminService.adminLogin(loginDTO, httpServletResponse);
     return new ResponseEntity<>(response, response.getStatus());
   }
 
