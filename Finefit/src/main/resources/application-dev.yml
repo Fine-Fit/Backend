@@ -21,3 +21,9 @@ spring:
         default_batch_fetch_size: 1000
     open-in-view: false
 
+
+  jwt:
+    secret: ${DEV.jwt.secret}
+    access-token-validity: ${DEV.jwt.access-token-validity}
+    refresh-token-validity: ${DEV.jwt.refresh-token-validity}
+

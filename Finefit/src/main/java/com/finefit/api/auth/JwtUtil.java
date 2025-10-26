@@ -25,7 +25,7 @@ public class JwtUtil {
   public static final long REFRESH_TOKEN_EXPIRE_TIME = 24 * 60 * 60 * 1000L;  // 24시간
   private final CustomUserDetailService userDetailService;
 
-  public JwtUtil(@Value("${spring.jwt.secret.key}")String secret,
+  public JwtUtil(@Value("${spring.jwt.secret}")String secret,
       CustomUserDetailService userDetailService) {
 
     this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8),
